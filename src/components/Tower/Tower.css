@@ -1,0 +1,10 @@
+.Tower {
+  flex-grow: 1;
+  margin: 0 5vw;
+}
+
+.Disk {
+  margin: auto;
+  height: 2vw;
+  border-radius: .3vw;
+}
