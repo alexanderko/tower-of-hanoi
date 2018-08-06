@@ -12,13 +12,7 @@ const diskStyle = d => {
 export default class Tower extends Component {
 
   render() {
-    const disks = [
-      { color: '#669BBC', width: 20 },
-      { color: '#A8C686', width: 40 },
-      { color: '#F3A712', width: 60 },
-      { color: '#29335C', width: 80 },
-      { color: '#E4572E', width: 100 }
-    ]
+    const disks = this.props.disks
 
     return (
       <div className="Tower"> 
