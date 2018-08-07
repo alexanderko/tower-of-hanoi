@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
 
 import './Tower.css'
-
-const diskStyle = d => {
-  return {
-    backgroundColor: d.color,
-    width: d.width + '%'
-  }
-}
+import Disk from '../Disk/Disk.jsx';
 
 export default class Tower extends Component {
 
@@ -16,9 +10,7 @@ export default class Tower extends Component {
 
     return (
       <div className="Tower" onClick={onClick} onMouseEnter={onEnter}> 
-        {disks.map(d => {
-          return <div className="Disk" style={diskStyle(d)}></div>
-        })}
+        {disks.map(d => <Disk disk={d}></Disk>)}
       </div>
     )
   }

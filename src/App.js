@@ -2,6 +2,28 @@ import React, { Component } from 'react'
 import './App.css'
 
 import Tower from './components/Tower/Tower.jsx'
+import Disk from './components/Disk/Disk.jsx';
+
+const styles = {
+  air: {
+    width: '100%'
+  },
+  move: {
+    height: '2vw',
+    width: '33.333%',
+    boxSizing: 'border-box',
+    padding: '0 7vw'
+  }
+}
+
+const moveStyle = move => {
+  if (!move) return styles.move;
+  switch (move.to) {
+    case 'left': return styles.move
+    case 'center': return {...styles.move, margin: '0 auto'}
+    case 'right': return {...styles.move, marginLeft: 'auto'}
+  }
+}
 
 class App extends Component {
   constructor() {
@@ -59,10 +81,15 @@ class App extends Component {
   }
 
   render() {
-    const {left, center, right} = this.state
+    const {left, center, right, move} = this.state
 
     return (
       <div className="Board">
+        <div style={styles.air}>
+          <div style={moveStyle(move)}>
+            {move && <Disk disk={move.disk}></Disk>}
+          </div>
+        </div>
         <Tower 
           disks={left}
           onClick={this.performMove('left')}

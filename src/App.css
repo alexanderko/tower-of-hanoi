@@ -5,4 +5,5 @@
 
 .Board {
   display: flex;
+  flex-wrap: wrap;
 }
