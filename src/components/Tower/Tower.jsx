@@ -12,10 +12,10 @@ const diskStyle = d => {
 export default class Tower extends Component {
 
   render() {
-    const disks = this.props.disks
+    const {disks, onClick, onEnter} = this.props
 
     return (
-      <div className="Tower"> 
+      <div className="Tower" onClick={onClick} onMouseEnter={onEnter}> 
         {disks.map(d => {
           return <div className="Disk" style={diskStyle(d)}></div>
         })}
