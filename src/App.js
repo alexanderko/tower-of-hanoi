@@ -28,7 +28,7 @@ class App extends Component {
       let disk = disks.shift()
       this.setState({
         [tower]: disks,
-        move: { disk, from: tower }
+        move: { disk, from: tower, to: tower }
       })
     }
   }
