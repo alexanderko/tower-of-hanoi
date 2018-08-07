@@ -3,6 +3,8 @@ import './App.css'
 
 import Tower from './components/Tower/Tower.jsx'
 import Disk from './components/Disk/Disk.jsx';
+import store from './store';
+import { completeMove } from './actions/moveActions';
 
 const styles = {
   air: {
@@ -70,6 +72,8 @@ class App extends Component {
       [move.to]: disks,
       move: null
     })
+
+    store.dispatch(completeMove(move))
   }
 
   performMove = tower => () => {

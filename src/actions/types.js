@@ -1,0 +1,1 @@
+export const COMPLETE_MOVE = 'COMPLETE_MOVE'
