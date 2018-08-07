@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import store from '../../store';
+import { startNewGame } from '../../actions/gameActions';
+import './Toolbar.css'
 
 const mapStoreState = () => {
   let { moves } = store.getState()
@@ -17,10 +19,17 @@ export default class Toolbar extends Component {
     store.subscribe(this.updateState)
   }
 
+  onStartNewGame() {
+    store.dispatch(startNewGame())
+  }
+
   render() {
     return (
-      <div>
-        Moves: {this.state.moves}
+      <div className="Toolbar">
+        <button onClick={this.onStartNewGame}>Start new game</button>
+        <span>
+          Moves: {this.state.moves}
+        </span>
       </div>
     )
   }

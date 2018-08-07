@@ -5,7 +5,7 @@ import Tower from '../Tower/Tower.jsx'
 import Disk from '../Disk/Disk.jsx'
 
 import store from '../../store'
-import { completeMove } from '../../actions/moveActions'
+import { completeMove, startMove } from '../../actions/moveActions'
 
 const styles = {
   air: {
@@ -31,55 +31,40 @@ const moveStyle = move => {
 class Board extends Component {
   constructor() {
     super()
-    this.state = {
-      left: [
-        { color: '#F3A712', width: 60 },
-        { color: '#29335C', width: 80 },
-        { color: '#E4572E', width: 100 }
-      ],
-      center: [
-        { color: '#669BBC', width: 20 }
-      ],
-      right: [
-        { color: '#A8C686', width: 40 }
-      ],
-      move: null
-    }
+    this.state = store.getState()
+  }
+
+  componentDidMount() {
+    store.subscribe(() => {
+      const { left, right, center, move} = store.getState();
+      this.setState({ left, right, center, move})
+    })
   }
 
   startMove(tower) {
-    let disks = [...this.state[tower]]
+    let disks = this.state[tower]
     if (disks.length) {
-      let disk = disks.shift()
-      this.setState({
-        [tower]: disks,
-        move: { disk, from: tower, to: tower }
-      })
+      let disk = disks[0]
+      store.dispatch(startMove({ disk, tower }))
     }
   }
 
   updateMove = tower => () => {
     if (this.state.move) {
-      let move = { ...this.state.move, to: tower }
-      this.setState({ move })
+      this.setState({
+        move: {...this.state.move, to: tower}
+      })
     }
   }
 
-  completeMove() {
-    let move  = this.state.move
-    let disks = [...this.state[move.to]]
-    disks.unshift(move.disk)
-    this.setState({
-      [move.to]: disks,
-      move: null
-    })
-
-    store.dispatch(completeMove(move))
+  completeMove(tower) {
+    let { disk }  = this.state.move
+    store.dispatch(completeMove({ disk, tower }))
   }
 
   performMove = tower => () => {
     if (this.state.move) {
-      this.completeMove()
+      this.completeMove(tower)
     } else {
       this.startMove(tower)
     }
