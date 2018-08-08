@@ -4,9 +4,6 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 
-.Toolbar>button {
-  background-color: darkseagreen;
-  font-size: 2rem;
-  cursor: pointer;
-  font-family: inherit;
+.Toolbar>span {
+  padding: 0 2rem;
 }
